@@ -4072,4 +4072,373 @@ input[type="range"]:focus {
   .ma-confidence-label {
     display: none;
   }
+}/* =========================================================================
+   RESPONSIVE DESIGN (MOBILE-FIRST & BREAKPOINTS)
+   ========================================================================= */
+
+/* SMALL LAPTOP / TABLET LANDSCAPE (~1024px) */
+@media (max-width: 1024px) {
+    .fp-root {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        height: auto;
+        overflow: auto;
+        padding-bottom: 40px;
+    }
+
+    .fp-col-right {
+        grid-column: 1 / -1;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        border-left: none;
+        height: auto;
+    }
+
+    .dp-row-two,
+    .dp-graphs-grid {
+        grid-template-columns: 1fr;
+        gap: var(--sp-3);
+    }
+}
+
+/* TABLET PORTRAIT (~768px) */
+@media (max-width: 768px) {
+    :root {
+        --fs-hero: 32px;
+        --fs-section: 22px;
+        --fs-card: 16px;
+        --sp-3: 16px;
+        --sp-5: 32px;
+        --sp-7: 80px;
+    }
+
+    .navbar-links {
+        display: none;
+        /* Hide on tablet/mobile for standard nav */
+    }
+
+    .navbar-brand {
+        margin: 0;
+    }
+
+    .fp-root {
+        grid-template-columns: 1fr;
+        height: auto;
+        overflow: visible;
+    }
+
+    .fp-col {
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        height: auto;
+        padding-bottom: 24px;
+    }
+
+    .fp-metrics-grid,
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hp-hero-title {
+        font-size: clamp(40px, 8vw, 72px);
+    }
+
+    .sp-card {
+        width: 100%;
+        height: auto;
+        min-height: 500px;
+    }
+
+    .dp-graphs-section {
+        padding: var(--sp-2);
+    }
+}
+
+/* MOBILE (~480px) */
+@media (max-width: 480px) {
+    :root {
+        --fs-hero: 28px;
+        --fs-section: 20px;
+        --sp-3: 12px;
+        --sp-5: 24px;
+        --radius: 12px;
+    }
+
+    .page-content {
+        padding-top: 80px;
+    }
+
+    /* Make buttons full width */
+    button {
+        width: 100%;
+        min-height: 44px;
+        /* Tap targets */
+    }
+
+    /* Scale typography */
+    h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    /* Adjust charts to scrollable */
+    .charts-section,
+    .dp-graphs-grid,
+    .rp-diag-left {
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+
+    svg {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Navigation */
+    .navbar {
+        width: 100%;
+        top: 0;
+        border-radius: 0;
+    }
+
+    .hp-hero {
+        height: auto;
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    .rp-root {
+        padding: 24px 16px 60px;
+    }
+
+    .rp-diagnostic-split {
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .rp-diag-right,
+    .rp-diag-left {
+        width: 100%;
+    }
+
+    .hp-switcher-bar {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}/* =========================================================================
+   MOBILE RESPONSIVE NAV BAR & HAMBURGER
+   ========================================================================= */
+
+.mobile-menu-btn {
+    display: none;
+    background: transparent;
+    color: var(--text-primary);
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 4px;
+    box-shadow: none;
+    z-index: 101;
+}
+
+.mobile-menu-btn:hover {
+    background: transparent;
+    transform: none;
+    box-shadow: none;
+    color: var(--accent-primary);
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .navbar {
+        border-radius: 0;
+        top: 0;
+        width: 100%;
+        border-left: none;
+        border-right: none;
+        border-top: none;
+    }
+
+    .navbar-inner {
+        justify-content: flex-start;
+    }
+
+    .navbar-brand {
+        margin-left: 10px;
+    }
+
+    .navbar-links {
+        display: none;
+        /* Hide default flex links */
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 20px 0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        gap: 16px;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+    }
+
+    .navbar-links.mobile-open {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .nav-link {
+        font-size: 18px;
+        padding: 12px 24px;
+        border-radius: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-link.active {
+        background: rgba(59, 130, 246, 0.08);
+    }
+}/* =========================================================================
+   DASHBOARD & FULL-VIEW SCROLL PROTECTION
+   ========================================================================= */
+
+/* Prevent overflowing SVGs */
+svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Ensure Dashboard and Risk Timeline items wrap gracefully on smaller devices */
+.dp-tl-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--sp-2);
+}
+
+@media (max-width: 768px) {
+
+    /* Prevent horizontal scroll on complex views by enabling overflow boxes */
+    .dp-tl-row {
+        overflow-x: auto;
+        padding-bottom: 12px;
+    }
+
+    .dp-metrics-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+
+    /* Stack Dashboard top cards vertically */
+    .dp-row-two {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .dp-metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dp-card {
+        padding: var(--sp-2);
+    }
+
+    /* Specific handling for Result Page impacts */
+    .rp-impact-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        text-align: center;
+    }
+
+    .rp-impact-arrow {
+        transform: rotate(90deg);
+    }
+}/* =========================================================================
+   FINANCE AND RESULT PAGE LAYOUT & RESPONSIVENESS
+   ========================================================================= */
+
+@media (max-width: 1024px) {
+    .fp-root {
+        grid-template-columns: 1fr;
+        height: auto;
+        overflow: visible;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Finance Pages adjustments to ensure columns aren't cut */
+    .fp-root {
+        grid-template-columns: 1fr;
+    }
+
+    .fp-col {
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        height: auto;
+        padding-bottom: 24px;
+        margin-bottom: 24px;
+    }
+
+    /* Handle Result Page layouts for mobile wrapping */
+    .rp-section {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .rp-diagnostic-split {
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .rp-diag-left,
+    .rp-diag-right,
+    .rp-diag-card {
+        width: 100%;
+    }
+
+    .rp-confidence-row {
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .fp-metrics-grid {
+        grid-template-columns: 1fr;
+        /* Stack columns on smallest phones */
+    }
+
+    .rp-root {
+        padding: 24px 16px 80px;
+    }
+
+    /* Assure tap targets */
+    .fp-block-toggle {
+        min-height: 44px;
+    }
+
+    .fp-input {
+        min-height: 44px;
+    }
+
+    .rp-mode-btn {
+        min-height: 44px;
+    }
 }

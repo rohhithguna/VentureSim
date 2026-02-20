@@ -6,6 +6,10 @@ function Layout({ children }) {
     var scrolled = scrolledState[0];
     var setScrolled = scrolledState[1];
 
+    var menuOpenState = useState(false);
+    var menuOpen = menuOpenState[0];
+    var setMenuOpen = menuOpenState[1];
+
     useEffect(function () {
         function handleScroll() {
             setScrolled(window.scrollY > 10);
@@ -21,13 +25,18 @@ function Layout({ children }) {
             <nav className={'navbar' + (scrolled ? ' scrolled' : '')}>
                 <div className="navbar-inner">
                     <span className="navbar-brand">VentureSim</span>
-                    <div className="navbar-links">
-                        <NavLink to="/" className={function (props) { return 'nav-link' + (props.isActive ? ' active' : ''); }}>Home</NavLink>
-                        <NavLink to="/setup" className={function (props) { return 'nav-link' + (props.isActive ? ' active' : ''); }}>Setup</NavLink>
-                        <NavLink to="/market" className={function (props) { return 'nav-link' + (props.isActive ? ' active' : ''); }}>Market</NavLink>
-                        <NavLink to="/finance" className={function (props) { return 'nav-link' + (props.isActive ? ' active' : ''); }}>Finance</NavLink>
-                        <NavLink to="/dashboard" className={function (props) { return 'nav-link' + (props.isActive ? ' active' : ''); }}>Dashboard</NavLink>
-                        <NavLink to="/result" className={function (props) { return 'nav-link' + (props.isActive ? ' active' : ''); }}>Result</NavLink>
+
+                    <button className="mobile-menu-btn" onClick={function () { setMenuOpen(!menuOpen); }}>
+                        {menuOpen ? '✕' : '☰'}
+                    </button>
+
+                    <div className={'navbar-links' + (menuOpen ? ' mobile-open' : '')}>
+                        <NavLink to="/" onClick={function () { setMenuOpen(false); }} className={function (props) { return 'nav-link' + (props.isActive ? ' active' : ''); }}>Home</NavLink>
+                        <NavLink to="/setup" onClick={function () { setMenuOpen(false); }} className={function (props) { return 'nav-link' + (props.isActive ? ' active' : ''); }}>Setup</NavLink>
+                        <NavLink to="/market" onClick={function () { setMenuOpen(false); }} className={function (props) { return 'nav-link' + (props.isActive ? ' active' : ''); }}>Market</NavLink>
+                        <NavLink to="/finance" onClick={function () { setMenuOpen(false); }} className={function (props) { return 'nav-link' + (props.isActive ? ' active' : ''); }}>Finance</NavLink>
+                        <NavLink to="/dashboard" onClick={function () { setMenuOpen(false); }} className={function (props) { return 'nav-link' + (props.isActive ? ' active' : ''); }}>Dashboard</NavLink>
+                        <NavLink to="/result" onClick={function () { setMenuOpen(false); }} className={function (props) { return 'nav-link' + (props.isActive ? ' active' : ''); }}>Result</NavLink>
                     </div>
                 </div>
             </nav>
