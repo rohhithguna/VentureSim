@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStartup } from '../context/StartupContext';
-import { phases } from '../data/phases';
 import { analyzeStartup } from '../services/analysisEngine';
 import { predictOutcomes } from '../services/projectionEngine';
 
@@ -186,7 +185,7 @@ function LandingPage() {
     var alreadyPlayed = sessionStorage.getItem('introPlayed');
 
     if (alreadyPlayed) {
-      
+
       window.scrollTo(0, window.innerHeight);
       return;
     }

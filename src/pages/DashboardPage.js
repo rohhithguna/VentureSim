@@ -12,7 +12,7 @@ import { generateRandomEvent } from '../services/eventEngine';
 function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 
 function useOnMount(fn) {
-    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(fn, []);
 }
 
@@ -134,7 +134,7 @@ function StabilityMap({ marketDemand, executionStrength }) {
         <div className="dp-map-wrap">
             <div className="dp-map-title">STABILITY MAP</div>
             <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="dp-map-svg">
-                
+
                 <rect x="0" y="0" width={W / 2} height={H / 2} fill="rgba(0,0,0,0.015)" />
                 <rect x={W / 2} y="0" width={W / 2} height={H / 2} fill="rgba(0,0,0,0.03)" />
                 <rect x="0" y={H / 2} width={W / 2} height={H / 2} fill="rgba(0,0,0,0.03)" />
@@ -279,14 +279,14 @@ function SVGLineChart({ data, dataKey, label, W, H, loaded }) {
     });
 
     var d = pts.map(function (p, i) { return (i === 0 ? 'M' : 'L') + p.x.toFixed(1) + ',' + p.y.toFixed(1); }).join(' ');
-    
+
     var areaD = d + ' L' + pts[pts.length - 1].x.toFixed(1) + ',' + (padT + chartH) + ' L' + padL + ',' + (padT + chartH) + ' Z';
 
     var yTicks = [0, 25, 50, 75, 100];
 
     return (
         <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
-            
+
             {yTicks.map(function (t) {
                 var y = padT + chartH - ((t - min) / range) * chartH;
                 return (
@@ -296,9 +296,9 @@ function SVGLineChart({ data, dataKey, label, W, H, loaded }) {
                     </g>
                 );
             })}
-            
+
             <path d={areaD} fill="rgba(15,23,42,0.04)" />
-            
+
             <path
                 d={d}
                 fill="none"
@@ -315,7 +315,7 @@ function SVGLineChart({ data, dataKey, label, W, H, loaded }) {
                     }
                 }}
             />
-            
+
             {pts.map(function (p, i) {
                 return (
                     <text key={i} x={p.x} y={padT + chartH + 14} textAnchor="middle" fontSize="8" fill="#94A3B8" fontFamily="Inter, system-ui">
@@ -323,7 +323,7 @@ function SVGLineChart({ data, dataKey, label, W, H, loaded }) {
                     </text>
                 );
             })}
-            
+
             <text x={padL} y={padT - 2} fontSize="9" fontWeight="600" fill="#475569" fontFamily="Inter, system-ui" letterSpacing="0.05em">
                 {label}
             </text>

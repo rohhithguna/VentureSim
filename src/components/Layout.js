@@ -14,7 +14,7 @@ function Layout({ children }) {
         return function () {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, []);
+    }, [setScrolled]);
 
     return (
         <div>

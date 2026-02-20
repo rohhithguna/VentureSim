@@ -105,10 +105,9 @@ function timelineStatus(month, metrics, survProb) {
 function ResultPage() {
     var { state } = useStartup();
     var metrics = state.metrics;
-    var startup = state.startup;
 
     var [investorMode, setInvestorMode] = useState(false);
-    
+
     var [tlVisible, setTlVisible] = useState(false);
 
     useEffect(function () {

@@ -4,7 +4,6 @@ import { useStartup } from '../context/StartupContext';
 
 function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 function fmt(n) { return '$' + Math.abs(Math.round(n)).toLocaleString(); }
-function fmtSign(n) { return (n >= 0 ? '+$' : '-$') + Math.abs(Math.round(n)).toLocaleString(); }
 
 function useAnimatedNumber(target, duration) {
     var [display, setDisplay] = useState(target);
@@ -40,7 +39,7 @@ function AnimNum({ value, prefix, suffix }) {
 }
 
 function StatusDot({ level }) {
-    
+
     var colors = { stable: '#6b7280', warning: '#9ca3af', critical: '#d1d5db' };
     var labels = { stable: 'STABLE', warning: 'WARNING', critical: 'CRITICAL' };
     return (
@@ -154,7 +153,7 @@ function FinancePage() {
     }
 
     var baseRevenue = cpu * cpm;
-    
+
     var retFactor = ret / 100;
     var churnFactor = 1 - (churn / 100) * 0.5;
     var monthlyRevenue = baseRevenue * retFactor * churnFactor * advMod;
@@ -274,7 +273,7 @@ function FinancePage() {
                 revenue: revenueScore
             }
         });
-        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [burnRate, runwayCapped, monthlyRevenue, totalCost]);
 
     return (
