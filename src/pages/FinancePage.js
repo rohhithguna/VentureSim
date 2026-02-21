@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStartup } from '../context/StartupContext';
 
@@ -262,19 +262,26 @@ function FinancePage() {
 
     var insights = generateInsights();
 
+    var stateRef = useRef(state);
+    stateRef.current = state;
+
+    var setStateStable = useCallback(function (updater) {
+        setState(updater);
+    }, [setState]);
+
     useEffect(function () {
         var revenueScore = totalCost > 0 ? Math.min(Math.round((monthlyRevenue / totalCost) * 50), 100) : (monthlyRevenue > 0 ? 100 : 0);
-        setState({
-            ...state,
+        var current = stateRef.current;
+        setStateStable({
+            ...current,
             metrics: {
-                ...state.metrics,
+                ...current.metrics,
                 burnRate: Math.round(burnRate),
                 runway: Math.min(Math.round(runwayCapped), 100),
                 revenue: revenueScore
             }
         });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [burnRate, runwayCapped, monthlyRevenue, totalCost]);
+    }, [burnRate, runwayCapped, monthlyRevenue, totalCost, setStateStable]);
 
     return (
         <div className="fp-root">

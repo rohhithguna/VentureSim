@@ -12,8 +12,9 @@ import { generateRandomEvent } from '../services/eventEngine';
 function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 
 function useOnMount(fn) {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(fn, []);
+    var ref = useRef(fn);
+    ref.current = fn;
+    useEffect(function () { ref.current(); }, []);
 }
 
 function useAnimatedProgress(target, duration) {
